@@ -1,0 +1,16 @@
+{
+  "name": "codeword-solver",
+  "version": "0.0.1",
+  "description": "Solves codeword puzzles",
+  "author": "Clinton Montague <iblamefish@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iblamefish/codeword-solver.git"
+  },
+  "main": "solver.js",
+  "dependencies": {
+    "underscore": "1.7.0"
+  },
+  "private": true,
+  "license": "MIT"
+}
