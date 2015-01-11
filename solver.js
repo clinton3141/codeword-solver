@@ -1,6 +1,9 @@
 (function() {
   var _ = require('underscore'),
-    fs = require('fs');
+    fs = require('fs'),
+    args = process.argv.slice(2),
+    spellcheck = require('./lib/spellcheck.js')('./dict/en_GB.aff', './dict/en_GB.dic');
+
 
   fs.readFile("./grid.txt", 'utf-8', function(e, data) {
     if (e) {
