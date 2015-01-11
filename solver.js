@@ -5,7 +5,11 @@
     spellcheck = require('./lib/spellcheck.js')('./dict/en_GB.aff', './dict/en_GB.dic');
 
 
-  fs.readFile("./grid.txt", 'utf-8', function(e, data) {
+  if (args.length !== 1) {
+    console.log("Usage: node solver.js grid_file.txt");
+  }
+
+  fs.readFile(args[0], 'utf-8', function(e, data) {
     if (e) {
       console.log(e);
       return;
