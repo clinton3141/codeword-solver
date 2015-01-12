@@ -2,7 +2,8 @@
   var _ = require('underscore'),
     fs = require('fs'),
     args = process.argv.slice(2),
-    spellcheck = require('./lib/spellcheck.js')('./dict/en_GB.aff', './dict/en_GB.dic');
+    spellcheck = require('./lib/spellcheck.js')('./dict/en_GB.aff', './dict/en_GB.dic'),
+    wordfinder = require('./lib/wordfinder.js');
 
 
   if (args.length !== 1) {
@@ -30,26 +31,6 @@
     }, {});
   }
 
-  function horizontal_word_list(grid) {
-    return _.chain(grid).map(function(row) {
-      return _.chain(row).reduce(function(wordlist, letter) {
-        var index = wordlist.length === 0 ? 0 : wordlist.length - 1;
-        if (!isNaN(letter)) {
-          if (typeof wordlist[index] == "undefined") {
-            wordlist[index] = [];
-          }
-          wordlist[index].push(letter);
-        } else {
-          wordlist.push([]);
-        }
-        return wordlist;
-      }, []).filter(function(word) {
-        return word.length > 1;
-      }).value();
-    }).filter(function(row) {
-      return row.length > 0;
-    }).flatten(true).value();
-  }
 
   function solve(data) {
     var grid = processGrid(data),
@@ -62,8 +43,8 @@
     }
 
     letter_frequency = frequency_analysis(_(grid).flatten());
-    words = horizontal_word_list(grid);
-
+    words = wordfinder.find_words(grid);
+    
     console.log(words);
   }
 
